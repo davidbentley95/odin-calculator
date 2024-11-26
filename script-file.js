@@ -5,9 +5,9 @@ const OPERATOR_OBJECT = {
     'division' : divide
 }
 
-let num1 = 0; 
-let num2 = 0;
-let runningTotal = 0;
+let num1 = ""; 
+let num2 = "";
+let runningTotal = "";
 let updateFirstNum = true;
 let operator = 'addition';
 let screenFormula = document.querySelector(".screen-formula");
@@ -43,6 +43,7 @@ function changeSign(num1) {
 function setNumberVariables(event) {
     if(updateFirstNum) {
         num1 += event.target.innerText;
+        console.log(Number(num1));
         screenFormula.innerText += event.target.innerText;
     } else {
         num2 += event.target.innerText;
@@ -62,9 +63,9 @@ document.querySelectorAll(".operation-button").forEach(item => {item.addEventLis
 })});
 
 document.querySelector("#clear").addEventListener("click", () => {
-    num1 = 0;
-    num2 = 0;
-    runningTotal = 0;
+    num1 = "";
+    num2 = "";
+    runningTotal = "";
     updateFirstNum = true;
     operator = 'addition';
     screenFormula.innerHTML = "";
@@ -76,9 +77,22 @@ document.querySelector(".equals-button").addEventListener("click", () => {
     runningTotal = OPERATOR_OBJECT[operator](Number(num1), Number(num2))
     screenTotal.innerText = runningTotal;
     num1 = runningTotal;
-    num2 = 0;
+    num2 = "";
     screenFormula.innerText = runningTotal;
 })
+
+document.querySelector(".decimal-button").addEventListener("click", () => {
+    if(updateFirstNum && !num1.split("").includes(".")) {
+        num1 += ".";
+        console.log(num1);
+        screenFormula.innerText += ".";
+    } 
+    if(!updateFirstNum && !num2.split("").includes(".")) {
+        num2 += ".";
+        console.log(num2);
+        screenFormula.innerText += ".";
+    }
+});
 
 
 // const sum = add(10, 20);

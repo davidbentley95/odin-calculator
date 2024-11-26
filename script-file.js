@@ -74,6 +74,8 @@ document.querySelector(".equals-button").addEventListener("click", () => {
     // console.log(OPERATOR_OBJECT[operator](Number(num1), Number(num2)));
     runningTotal = OPERATOR_OBJECT[operator](Number(num1), Number(num2))
     screenTotal.innerText = runningTotal;
+    num1 = runningTotal;
+    num2 = 0;
 })
 
 

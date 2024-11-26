@@ -43,11 +43,11 @@ function changeSign(num1) {
 function setNumberVariables(event) {
     if(updateFirstNum) {
         num1 += event.target.innerText;
-        screenFormula.innerText = num1;
+        screenFormula.innerText += event.target.innerText;
     } else {
         num2 += event.target.innerText;
         console.log(Number(num2));
-        screenFormula.innerText += num2;
+        screenFormula.innerText += event.target.innerText;
     }
     
 }
@@ -57,6 +57,7 @@ document.querySelectorAll(".number-button").forEach(item => {item.addEventListen
 document.querySelectorAll(".operation-button").forEach(item => {item.addEventListener("click", (event) => {
     updateFirstNum = false;
     operator = event.target.id;
+    screenFormula.innerText += event.target.innerText;
     console.log(operator);
 })});
 
@@ -76,6 +77,7 @@ document.querySelector(".equals-button").addEventListener("click", () => {
     screenTotal.innerText = runningTotal;
     num1 = runningTotal;
     num2 = 0;
+    screenFormula.innerText = runningTotal;
 })
 
 

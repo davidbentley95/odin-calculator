@@ -1,3 +1,17 @@
+const OPERATOR_OBJECT = {
+    'addition' : add,
+    'subtraction' : subtract,
+    'multiplication' : multiply,
+    'division' : divide
+}
+
+let num1 = 0;
+let num2 = 0;
+let updateFirstNum = true;
+let operator = 'addition';
+
+
+
 
 function add(num1, num2) {
     return num1 + num2;
@@ -22,6 +36,29 @@ function percentage(num1) {
 function changeSign(num1) {
     return num1 * (-1);
 }
+
+function setNumberVariables(event) {
+    if(updateFirstNum) {
+        num1 += event.target.innerText;
+        console.log(Number(num1));
+    } else {
+        num2 += event.target.innerText;
+        console.log(Number(num2));
+    }
+    
+}
+
+document.querySelectorAll(".number-button").forEach(item => {item.addEventListener("click", setNumberVariables)});
+
+document.querySelectorAll(".operation-button").forEach(item => {item.addEventListener("click", (event) => {
+    updateFirstNum = false;
+    operator = event.target.id;
+    console.log(operator);
+})});
+
+document.querySelector(".equals-button").addEventListener("click", () => {
+    console.log(OPERATOR_OBJECT[operator](Number(num1), Number(num2)));
+})
 
 
 // const sum = add(10, 20);

@@ -4,14 +4,37 @@ button {
 }
 
 .screen-formula {
-    width: 1080px; 
     height: 50px; 
     background-color: lightgray;
 }
 
 .screen-total {
-    width: 1080px; 
     height: 50px; 
     background-color: lightblue;
     text-align: right;
 }
+
+.calculator {
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 equal-width columns */
+    grid-auto-rows: auto; /* Automatically adjust row height based on content */
+    gap: 10px; /* Spacing between grid items */
+  }
+  
+  .calculator > :nth-child(1) {
+    grid-column: 1 / -1; /* Span all columns (full row) */
+  }
+  
+  .calculator > :nth-child(2) {
+    grid-column: 1 / -1; /* Span all columns (full row) */
+  }
+  
+
+  
+  /* Remaining children (from 5 onward, except the last child): evenly spaced, 5 per row */
+  .calculator > :nth-child(n+5):not(:nth-last-child(1)) {
+    grid-column: span 1; /* Each takes up 1 column */
+  }
+  
+ 

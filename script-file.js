@@ -14,8 +14,6 @@ let screenFormula = document.querySelector(".screen-formula");
 let screenTotal = document.querySelector(".screen-total");
 
 
-
-
 function add(num1, num2) {
     return num1 + num2;
 }

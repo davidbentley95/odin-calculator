@@ -5,10 +5,13 @@ const OPERATOR_OBJECT = {
     'division' : divide
 }
 
-let num1 = 0;
+let num1 = 0; 
 let num2 = 0;
+let runningTotal = 0;
 let updateFirstNum = true;
 let operator = 'addition';
+let screenFormula = document.querySelector(".screen-formula");
+let screenTotal = document.querySelector(".screen-total");
 
 
 
@@ -40,10 +43,11 @@ function changeSign(num1) {
 function setNumberVariables(event) {
     if(updateFirstNum) {
         num1 += event.target.innerText;
-        console.log(Number(num1));
+        screenFormula.innerText = num1;
     } else {
         num2 += event.target.innerText;
         console.log(Number(num2));
+        screenFormula.innerText += num2;
     }
     
 }
@@ -56,8 +60,20 @@ document.querySelectorAll(".operation-button").forEach(item => {item.addEventLis
     console.log(operator);
 })});
 
+document.querySelector("#clear").addEventListener("click", () => {
+    num1 = 0;
+    num2 = 0;
+    runningTotal = 0;
+    updateFirstNum = true;
+    operator = 'addition';
+    screenFormula.innerHTML = "";
+    screenTotal.innerHTML = "";
+})
+
 document.querySelector(".equals-button").addEventListener("click", () => {
-    console.log(OPERATOR_OBJECT[operator](Number(num1), Number(num2)));
+    // console.log(OPERATOR_OBJECT[operator](Number(num1), Number(num2)));
+    runningTotal = OPERATOR_OBJECT[operator](Number(num1), Number(num2))
+    screenTotal.innerText = runningTotal;
 })
 
 

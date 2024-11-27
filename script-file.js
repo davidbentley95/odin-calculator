@@ -119,3 +119,13 @@ document.querySelector(".delete-button").addEventListener("click", () => {
     num2 = num2.slice(0, -1);
     screenSecondNum.innerText = num2;
 });
+
+document.querySelector(".percentage-button").addEventListener("click", () => {
+    if(updateFirstNum) {
+        num1 = String((Number(num1)/100));
+        screenFirstNum.innerText = num1;
+    } else {
+        num2 = String((Number(num2)/100));
+        screenSecondNum.innerText = num2;
+    }
+});

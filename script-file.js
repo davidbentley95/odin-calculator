@@ -12,6 +12,9 @@ let updateFirstNum = true;
 let operator = 'addition';
 let screenFormula = document.querySelector(".screen-formula");
 let screenTotal = document.querySelector(".screen-total");
+let screenFirstNum = document.querySelector(".first-number");
+let screenSecondNum = document.querySelector(".second-number");
+let screenOperator = document.querySelector(".operator-symbol");
 
 
 function add(num1, num2) {
@@ -42,11 +45,11 @@ function setNumberVariables(event) {
     if(updateFirstNum) {
         num1 += event.target.innerText;
         console.log(Number(num1));
-        screenFormula.innerText += event.target.innerText;
+        screenFirstNum.innerText += event.target.innerText;
     } else {
         num2 += event.target.innerText;
         console.log(Number(num2));
-        screenFormula.innerText += event.target.innerText;
+        screenSecondNum.innerText += event.target.innerText;
     }
     
 }
@@ -56,7 +59,7 @@ document.querySelectorAll(".number-button").forEach(item => {item.addEventListen
 document.querySelectorAll(".operation-button").forEach(item => {item.addEventListener("click", (event) => {
     updateFirstNum = false;
     operator = event.target.id;
-    screenFormula.innerText += event.target.innerText;
+    screenOperator.innerText = event.target.innerText;
     console.log(operator);
 })});
 
@@ -66,31 +69,47 @@ document.querySelector("#clear").addEventListener("click", () => {
     runningTotal = "";
     updateFirstNum = true;
     operator = 'addition';
-    screenFormula.innerHTML = "";
-    screenTotal.innerHTML = "";
+    screenFirstNum.innerText = "";
+    screenSecondNum.innerText = "";
+    screenOperator.innerText = "";
+    screenTotal.innerText = "";
 })
 
 document.querySelector(".equals-button").addEventListener("click", () => {
-    // console.log(OPERATOR_OBJECT[operator](Number(num1), Number(num2)));
     runningTotal = OPERATOR_OBJECT[operator](Number(num1), Number(num2))
     screenTotal.innerText = runningTotal;
     num1 = runningTotal;
     num2 = "";
-    screenFormula.innerText = runningTotal;
+    screenFirstNum.innerText = runningTotal;
+    screenSecondNum.innerText = num2;
 })
 
 document.querySelector(".decimal-button").addEventListener("click", () => {
     if(updateFirstNum && !num1.split("").includes(".")) {
         num1 += ".";
-        console.log(num1);
-        screenFormula.innerText += ".";
+        screenFirstNum.innerText += ".";
     } 
     if(!updateFirstNum && !num2.split("").includes(".")) {
         num2 += ".";
-        console.log(num2);
-        screenFormula.innerText += ".";
+        screenSecondNum.innerText += ".";
     }
 });
+
+document.querySelector(".change-sign-button").addEventListener("click", () => {
+    if(updateFirstNum && !num1.split("").includes("-")) {
+        num1 = "-" + num1;
+        screenFirstNum.innerText = num1;
+    }else if(!updateFirstNum && !num2.split("").includes("-")) {
+        num2 = "-" + num2;
+        screenSecondNum.innerText = num2;
+    }else if(updateFirstNum && num1.split("").includes("-")) {
+        num1 = num1.slice(1);
+        screenFirstNum.innerText = num1;
+    }else if(!updateFirstNum && num2.split("").includes("-")) {
+        num2 = num2.slice(1);
+        screenFirstNum.innerText = num2;
+    }
+})
 
 
 // const sum = add(10, 20);

@@ -25,13 +25,13 @@ button {
     font-weight: 350;
     font-style: normal;
     color: white;
-    background-color: rgba(255,255,255,0.027);
+    background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(50px);
     border: none;
 }
 
 button:hover {
-    background-color: rgba(255,255,255,0.080);
+    background-color: rgba(255,255,255,0.2);
 }
 
 .screen-formula {
@@ -39,7 +39,7 @@ button:hover {
     align-items: center;
     padding-left: 20px;
     height: 50px;
-    background-color: rgba(255,255,255,0.027);
+    background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(50px);
 }
 
@@ -50,13 +50,13 @@ button:hover {
     padding-right: 20px;
     height: 50px; 
     text-align: right;
-    background-color: rgba(255,255,255,0.027);
+    background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(50px);
 }
 
 .calculator {
     width: 300px;
-    background-color: rgba(255,255,255,0.027);
+    background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(50px);
     border-top: 1px solid rgba(255,255,255,0.4);
     border-left: 1px solid rgba(255,255,255,0.4);

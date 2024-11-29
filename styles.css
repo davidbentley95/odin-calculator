@@ -33,6 +33,10 @@ button:hover {
     background-color: rgba(255,255,255,0.2);
 }
 
+button:active {
+    transform: scale(0.8);
+}
+
 .screen-formula {
     display: flex;
     align-items: center;
@@ -76,5 +80,3 @@ button:hover {
   .calculator > :nth-child(n+5):not(:nth-last-child(1)) {
     grid-column: span 1; 
   }
-  
- 

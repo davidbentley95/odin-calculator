@@ -1,7 +1,6 @@
 *{
     margin: 0;
     padding: 0;
-    touch-action: manipulation;
 }
 
 body {
@@ -16,6 +15,7 @@ body {
     font-weight: 350;
     font-style: normal;
     color: white;
+    touch-action: manipulation;
 }
 
 button {
@@ -28,6 +28,7 @@ button {
     color: white;
     background-color: rgba(255,255,255,0.1);
     border: none;
+    touch-action: manipulation;
 }
 
 button:hover {
@@ -68,6 +69,7 @@ button:active {
     grid-template-columns: repeat(5, 1fr); 
     grid-auto-rows: auto; 
     gap: 10px; 
+    touch-action: manipulation;
   }
   
   .calculator > :nth-child(1) {

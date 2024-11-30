@@ -1,8 +1,8 @@
 const OPERATOR_OBJECT = {
-    'addition' : add,
-    'subtraction' : subtract,
-    'multiplication' : multiply,
-    'division' : divide
+    add,
+    subtract,
+    multiply,
+    divide
 };
 
 let num1 = ""; 
@@ -54,6 +54,12 @@ function setNumberVariables(event) {
     
 };
 
+function getNumpadInput (event) {
+    let keyCode = event.code; 
+    let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+}
+
 
 document.querySelectorAll(".number-button").forEach(item => {item.addEventListener("click", setNumberVariables)});
 
@@ -73,7 +79,7 @@ document.querySelector("#clear").addEventListener("click", () => {
     num2 = "";
     runningTotal = "";
     updateFirstNum = true;
-    operator = 'addition';
+    operator = 'add';
     screenFirstNum.innerText = "";
     screenSecondNum.innerText = "";
     screenOperator.innerText = "";
@@ -81,7 +87,7 @@ document.querySelector("#clear").addEventListener("click", () => {
 });
 
 document.querySelector(".equals-button").addEventListener("click", () => {
-    runningTotal = String(OPERATOR_OBJECT[operator](Number(num1), Number(num2)));
+    runningTotal = String(OPERATOR_OBJECT[operator](Number(num1), Number(num2)).toFixed(4));
     screenTotal.innerText = runningTotal;
     num1 = runningTotal;
     num2 = "";
@@ -141,3 +147,8 @@ document.querySelector(".percentage-button").addEventListener("click", () => {
         screenSecondNum.innerText = num2;
     }
 });
+
+document.addEventListener("keydown", (e) => {
+    console.log(e.code.split("").slice(6).join(""));
+
+})

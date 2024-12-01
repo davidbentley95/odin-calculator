@@ -87,7 +87,7 @@ document.querySelector("#clear").addEventListener("click", () => {
 });
 
 document.querySelector(".equals-button").addEventListener("click", () => {
-    runningTotal = String(OPERATOR_OBJECT[operator](Number(num1), Number(num2)).toFixed(4));
+    runningTotal = String(OPERATOR_OBJECT[operator](Number(num1), Number(num2)).toFixed(2));
     screenTotal.innerText = runningTotal;
     num1 = runningTotal;
     num2 = "";

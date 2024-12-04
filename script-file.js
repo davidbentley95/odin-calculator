@@ -1,8 +1,8 @@
 const OPERATOR_OBJECT = {
-    add,
-    subtract,
-    multiply,
-    divide
+    'add' : add,
+    'subtract': subtract,
+    'multiply': multiply,
+    'divide': divide
 };
 
 let num1 = ""; 
@@ -10,7 +10,7 @@ let num2 = "";
 let runningTotal = "";
 let updateFirstNum = true;
 let runningTotalCalc = false; 
-let operator = 'addition';
+let operator = 'add';
 let screenFormula = document.querySelector(".screen-formula");
 let screenTotal = document.querySelector(".screen-total");
 let screenFirstNum = document.querySelector(".first-number");
@@ -54,11 +54,57 @@ function setNumberVariables(event) {
     
 };
 
-function getNumpadInput (event) {
-    let keyCode = event.code; 
-    let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+function addDecimalPoint() {
+    if(updateFirstNum && !num1.split("").includes(".")) {
+        num1 += ".";
+        screenFirstNum.innerText += ".";
+    } 
+    if(!updateFirstNum && !num2.split("").includes(".")) {
+        num2 += ".";
+        screenSecondNum.innerText += ".";
+    }
+};
 
-}
+function getNumpadInput (event) {
+    let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    let code = event.code.split("").splice(6).join("").toLowerCase();
+
+    if(event.key === "Enter") {
+        evaluateEquation();
+    }
+    if(numbers.some(el => el === event.key)) {
+        if(updateFirstNum) {
+            num1 += event.key;
+            screenFirstNum.innerText += event.key;
+        } else {
+            num2 += event.key;
+            screenSecondNum.innerText += event.key;
+            runningTotalCalc = false;
+        }
+    }
+    if(event.key === ".") {
+        addDecimalPoint();
+    }
+    if(code in OPERATOR_OBJECT) {
+        if(num1 === "") {
+        
+        } else {
+            updateFirstNum = false;
+            operator = code;
+            screenOperator.innerText = event.key;
+        }
+    }
+};
+
+function evaluateEquation() {
+    runningTotal = String(OPERATOR_OBJECT[operator](Number(num1), Number(num2)).toFixed(2));
+        screenTotal.innerText = runningTotal;
+        num1 = runningTotal; 
+        num2 = ""; 
+        screenFirstNum.innerText = runningTotal; 
+        screenSecondNum.innerText = "";
+        runningTotalCalc = true;
+};
 
 
 document.querySelectorAll(".number-button").forEach(item => {item.addEventListener("click", setNumberVariables)});
@@ -87,25 +133,10 @@ document.querySelector("#clear").addEventListener("click", () => {
 });
 
 document.querySelector(".equals-button").addEventListener("click", () => {
-    runningTotal = String(OPERATOR_OBJECT[operator](Number(num1), Number(num2)).toFixed(2));
-    screenTotal.innerText = runningTotal;
-    num1 = runningTotal;
-    num2 = "";
-    screenFirstNum.innerText = runningTotal;
-    screenSecondNum.innerText = num2;
-    runningTotalCalc = true;
+    evaluateEquation();
 });
 
-document.querySelector(".decimal-button").addEventListener("click", () => {
-    if(updateFirstNum && !num1.split("").includes(".")) {
-        num1 += ".";
-        screenFirstNum.innerText += ".";
-    } 
-    if(!updateFirstNum && !num2.split("").includes(".")) {
-        num2 += ".";
-        screenSecondNum.innerText += ".";
-    }
-});
+document.querySelector(".decimal-button").addEventListener("click", addDecimalPoint);
 
 document.querySelector(".change-sign-button").addEventListener("click", () => {
     if(updateFirstNum && !num1.split("").includes("-")) {
@@ -148,7 +179,4 @@ document.querySelector(".percentage-button").addEventListener("click", () => {
     }
 });
 
-document.addEventListener("keydown", (e) => {
-    console.log(e.code.split("").slice(6).join(""));
-
-})
+document.addEventListener("keydown", getNumpadInput);
